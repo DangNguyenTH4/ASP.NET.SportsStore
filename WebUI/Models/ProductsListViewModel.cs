@@ -10,5 +10,6 @@ namespace WebUI.Models
     {
         public IEnumerable<Product> Productsss { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }

@@ -9,18 +9,18 @@
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">Sports Store</a>
+        <a class="navbar-brand" href="#">SPORTS STORE</a>
     </div>
     <div class="row panel">
         <div id="categories" class="col-xs-3">
-            Put something useful here later
+            @Html.Action("Menu", "Nav")
         </div>
         <div class="col-xs-8">
             @RenderBody()
         </div>
     </div>
     @*<div>
-        @RenderBody()
-    </div>*@
+            @RenderBody()
+        </div>*@
 </body>
 </html>

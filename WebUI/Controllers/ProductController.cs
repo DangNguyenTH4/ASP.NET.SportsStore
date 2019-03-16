@@ -17,23 +17,43 @@ namespace WebUI.Controllers
             this.repository = productRepo;
         }
         // GET: Product
-        public ActionResult List(int page = 1 )
+        public ActionResult List(string category, int page = 1 )
         {
             ProductsListViewModel model = new ProductsListViewModel
             {
                 Productsss = repository.Productss
-                    .OrderBy(p=>p.ProductID)
-                    .Skip((page-1)*PageSize)
+                    .Where(p => category == null || p.Category.Equals(category))
+                    .OrderBy(p => p.ProductID)
+                    .Skip((page - 1) * PageSize)
                     .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ITemsPerPage = PageSize,
                     TotalItems = repository.Productss.Count()
-                }
+                },
+                CurrentCategory = category
 
             };
             return View(model);
         }
+        //public ActionResult List( int page = 1)
+        //{
+        //    ProductsListViewModel model = new ProductsListViewModel
+        //    {
+        //        Productsss = repository.Productss
+        //            .OrderBy(p => p.ProductID)
+        //            .Skip((page - 1) * PageSize)
+        //            .Take(PageSize),
+        //        PagingInfo = new PagingInfo
+        //        {
+        //            CurrentPage = page,
+        //            ITemsPerPage = PageSize,
+        //            TotalItems = repository.Productss.Count()
+        //        },
+        //        CurrentCategory = null
+        //    };
+        //    return View(model);
+        //}
     }
 }

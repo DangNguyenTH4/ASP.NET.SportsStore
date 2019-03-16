@@ -14,14 +14,46 @@ namespace WebUI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: null,
-                url: "Page{page}",
-                defaults: new { Controller = "Product", action = "List" });
+                null,                       //Name
+                "",                         //Url
+                new                         //Default
+                {
+                    controller = "Product",
+                    action = "List",
+                    category = (string)null,
+                    page = 1
+                });
+
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Product", action = "List", id = UrlParameter.Optional }
-            );
+                null,                       //Name
+                "Page{page}",               //Url
+                                            //Default
+                new { controller = "Product", action = "List", category = (string)null },
+                new { page = @"\d+" });     //Constraint
+
+            routes.MapRoute(
+                null,                       //Name
+                "{category}",               //Url
+                                            //Default
+                new { controller = "Product", action = "List", page = 1 });
+
+            routes.MapRoute(
+                null,
+                "{category}/Page{page}",
+                new { controller = "Product", action = "List" },
+                new { page = @"\d+" });
+
+            routes.MapRoute(null, "{controller}/{action}");
+
+            //routes.MapRoute(
+            //    name: null,
+            //    url: "Page{page}",
+            //    defaults: new { Controller = "Product", action = "List" });
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "Product", action = "List", id = UrlParameter.Optional }
+            //);
         }
     }
 }
