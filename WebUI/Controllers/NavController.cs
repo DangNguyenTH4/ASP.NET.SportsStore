@@ -15,12 +15,23 @@ namespace WebUI.Controllers
             repository = repo;
         }
         // GET: Nav
-        public PartialViewResult Menu()
+        public PartialViewResult Menu(string category = null)
         {
+            ViewBag.SelectedCategory = category;
+            //IEnumerable<string> categories;
+            //if (category == null)
+            //{
+            //    categories = repository.Productss
+            //                                    .Select(x => x.Category)
+            //                                    .Distinct()
+            //                                    .Distinct()
+            //                                    .OrderBy(x => x);
+            //}
+            //else
             IEnumerable<string> categories = repository.Productss
-                                                        .Select(x => x.Category)
-                                                        .Distinct()
-                                                        .OrderBy(x => x);
+                                                            .Select(x => x.Category)
+                                                            .Distinct()
+                                                            .OrderBy(x => x);
             return PartialView(categories);
         }
     }

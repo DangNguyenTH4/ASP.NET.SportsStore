@@ -30,7 +30,10 @@ namespace WebUI.Controllers
                 {
                     CurrentPage = page,
                     ITemsPerPage = PageSize,
-                    TotalItems = repository.Productss.Count()
+                    TotalItems = category == null ? repository.Productss.Count()
+                                                    //repository.Productss.Where(x => x.Category.Equals(category)).Count()
+                                                    //repository.Productss.Count().Where(x => x.Category.Equals(category))
+                                                    :repository.Productss.Count(c=>c.Category.Equals(category))
                 },
                 CurrentCategory = category
 
