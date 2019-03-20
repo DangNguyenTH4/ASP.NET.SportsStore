@@ -13,6 +13,7 @@ namespace WebUI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
             routes.MapRoute(
                 null,                       //Name
                 "",                         //Url

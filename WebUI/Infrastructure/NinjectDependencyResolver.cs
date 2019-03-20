@@ -8,6 +8,7 @@ using Domain.Entities;
 using Domain.Concrete;
 using Moq;
 using Ninject;
+using System.Configuration;
 
 namespace WebUI.Infrastructure
 {
@@ -32,6 +33,13 @@ namespace WebUI.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IProductRepository>().To<EFProductRepostory>();
+
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                                                                .WithConstructorArgument("settings", emailSettings);
         }
     }
 }
