@@ -10,5 +10,6 @@ namespace Domain.Abstract
     public interface IProductRepository
     {
         IEnumerable<Product> Productss { get; }
+        void SaveProduct(Product product);
     }
 }
