@@ -1,4 +1,5 @@
 ﻿using Domain.Abstract;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,5 +59,17 @@ namespace WebUI.Controllers
         //    };
         //    return View(model);
         //}
+        public FileContentResult GetImage(int productID)
+        {
+            Product prod = repository.Productss.FirstOrDefault(p => p.ProductID == productID);
+            if (prod != null)
+            {
+                return File(prod.ImageData, prod.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

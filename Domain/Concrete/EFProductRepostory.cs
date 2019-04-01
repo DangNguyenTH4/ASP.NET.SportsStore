@@ -15,6 +15,7 @@ namespace Domain.Concrete
         {
             if (product.ProductID == 0)
             {
+                product.ProductID = GetFinalIDProduct() + 1;
                 context.Products.Add(product);
             }
             else
@@ -22,6 +23,8 @@ namespace Domain.Concrete
                 Product dbEntry = context.Products.Find(product.ProductID);
                 if (dbEntry != null)
                 {
+                    dbEntry.ImageData = product.ImageData;
+                    dbEntry.ImageMimeType = product.ImageMimeType;
                     dbEntry.Name = product.Name;
                     dbEntry.Description = product.Description;
                     dbEntry.Price = product.Price;
@@ -39,6 +42,12 @@ namespace Domain.Concrete
                 context.SaveChanges();
             }
             return dbEntry;
+        }
+        public int GetFinalIDProduct()
+        {
+            int count = context.Products.Count();
+            var pro = context.Products.ToArray()[count - 1];
+            return pro.ProductID;
         }
     }
 }
